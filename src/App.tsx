@@ -1,25 +1,48 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
+import { useRef, useReducer, useState } from 'react';
+import {
+  Container,
+  Stage,
+  Sprite,
+  useTick,
+} from './components';
 import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const reducer = (_, { data }) => data;
 
+  console.log('### count: ', count);
+
+  const Bunny = () => {
+    const [motion, update] = useReducer(reducer);
+    const iter = useRef(0);
+    useTick((delta) => {
+      const i = (iter.current += (0.05 * delta)); // eslint-disable-line
+      update({
+        type: 'update',
+        data: {
+          x: Math.sin(i) * 100,
+          y: Math.sin(i / 1.5) * 100,
+          rotation: Math.sin(i) * Math.PI,
+          anchor: Math.sin(i / 2),
+        },
+      });
+    });
+
+    return (
+      <Sprite
+        image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png"
+        {...motion} // eslint-disable-line
+      />
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((c) => c + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-      </header>
-    </div>
+    <Stage>
+      <Container x={150} y={150}>
+        <Bunny />
+      </Container>
+    </Stage>
   );
 }
 
