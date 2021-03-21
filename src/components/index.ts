@@ -2,14 +2,14 @@ import {
   Container,
   Stage,
   Sprite,
+  TilingSprite,
   Text,
-  useTick,
 } from '@inlet/react-pixi';
 
 export {
   Container,
   Stage,
   Sprite,
+  TilingSprite,
   Text,
-  useTick,
 };
