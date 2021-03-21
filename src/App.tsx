@@ -52,30 +52,34 @@ const Bunny = memo((props: ChildProps) => {
 
   const iter = useRef(initialState);
 
-  /* useEffect(() => { */
-  /*   const newState = { */
-  /*     ...initialState, */
-  /*     x: moveTo.x, */
-  /*     y: moveTo.y, */
-  /*   }; */
+  useTick((delta = 0) => {
+    const dx = iter.current.x - moveTo.x;
+    const dy = iter.current.y - moveTo.y;
 
-  /*   iter.current = newState; */
+    const a = 5 * delta;
 
-  /*   update({ */
-  /*     type: 'update', */
-  /*     data: newState, */
-  /*   }); */
-  /* }, [moveTo, initialState]); */
+    if (Math.sqrt(dx * dx + dy * dy) >= 6) {
+      if (dx >= 0) {
+        iter.current.x -= a;
+      } else {
+        iter.current.x += a;
+      }
 
-  useTick(() => {
-    // const i = (iter.current += (0.05 * delta)); // eslint-disable-line
+      if (dy >= 0) {
+        iter.current.y -= a;
+      } else {
+        iter.current.y += a;
+      }
+    } else {
+      iter.current.x = moveTo.x;
+      iter.current.y = moveTo.y;
+    }
+
     const newState = {
       ...initialState,
-      x: moveTo.x,
-      y: moveTo.y,
+      x: iter.current.x,
+      y: iter.current.y,
     };
-
-    iter.current = newState;
 
     update({
       type: 'update',
@@ -95,8 +99,10 @@ function App() {
   const [newPosition, setNewPosition] = useState({ x: 0, y: 0 });
   console.log('### newPosition: ', newPosition);
 
-  const handleMouseDown = useCallback((e: any) => {
-    setNewPosition(e.data.global);
+  const handleMoveTo = useCallback((e: any) => {
+    // this is fucking awesome, without ... it will always stick to the global
+    // because of reference :D yay :D
+    setNewPosition({ ...e.data.global });
   }, []);
 
   return (
@@ -105,17 +111,14 @@ function App() {
         interactive
         x={0}
         y={0}
-        rightdown={handleMouseDown}
-        rightup={() => setNewPosition({ x: 0, y: 0 })}
+        rightdown={handleMoveTo}
       >
-
         <TilingSprite
           image="/sand.png"
           width={800}
           height={400}
           tilePosition={{ x: 0, y: 0 }}
         />
-
         <Bunny moveTo={newPosition} />
       </Container>
     </Stage>
