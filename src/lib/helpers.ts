@@ -16,16 +16,18 @@ import type {
 } from './types';
 
 export const getDistance = (
-  source: Point | null,
-  target: Point | null,
-): Distance | null => {
-  if (!source || !target) return null;
+  source?: Point,
+  target?: Point,
+): Distance => {
+  if (!source || !target) {
+    return { x: 0, y: 0, value: 0 };
+  }
 
   const x = target.x - source.x;
   const y = target.y - source.y;
-  const total = Math.sqrt(x * x + y * y);
+  const value = Math.sqrt(x * x + y * y);
 
-  return { x, y, total };
+  return { x, y, value };
 };
 
 export const lerp = (v0: number, v1: number, t: number) => (1 - t) * v0 + t * v1;
