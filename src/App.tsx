@@ -7,23 +7,17 @@ import {
   TilingSprite,
   Unit,
 } from './components';
-
-const stageOptions = {
-  antialias: true,
-  backgroundColor: 0x333333,
-  // powerPreference: 'high-performance', // detect dual graphic cards before use
-};
+import { initialState, stageOptions } from './lib/constants';
 
 function App() {
-  const [newPosition, setNewPosition] = useState({ x: 0, y: 0 });
-  console.log('### newPosition: ', newPosition);
+  const [newPosition, setNewPosition] = useState(initialState);
 
   const handleMoveTo = useCallback((e: any) => {
     setNewPosition({ ...e.data.global }); // Need to create new object here
   }, []);
 
   return (
-    <Stage width={800} height={400} options={stageOptions}>
+    <Stage width={600} height={400} options={stageOptions}>
       <Container
         interactive
         x={0}
@@ -32,11 +26,15 @@ function App() {
       >
         <TilingSprite
           image="/sand.png"
-          width={800}
+          width={600}
           height={400}
           tilePosition={{ x: 0, y: 0 }}
         />
-        <Unit moveTo={newPosition} />
+
+        <Unit
+          moveTo={newPosition}
+          skin="https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png"
+        />
       </Container>
     </Stage>
   );

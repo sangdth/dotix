@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {
   useCallback,
-  useEffect,
-  useMemo,
   useReducer,
-  useRef,
 } from 'react';
 import { Sprite, useTick } from '@inlet/react-pixi';
-import { cloneDeep, isEqual } from 'lodash';
+import { cloneDeep } from 'lodash';
+import merge from 'deepmerge';
 
 import {
   memo,
@@ -15,32 +13,16 @@ import {
   lerp,
   angularLerp,
 } from '../lib/helpers';
-import { usePrevious } from '../lib/hooks';
 import type {
   PositionState,
   PositionAction,
 } from '../lib/types';
-
-export type UnitProps = {
-  moveTo: { x: number, y: number };
-  // position: Position;
-};
-
-const initialState: PositionState = {
-  x: 0,
-  y: 0,
-  rotation: 0,
-  anchor: 0,
-  direction: 0,
-};
+import { initialState } from '../lib/constants';
 
 const reducer = (s: PositionState, a: PositionAction): PositionState => {
   switch (a.type) {
     case 'update':
-      return {
-        ...s,
-        ...a.payload,
-      };
+      return merge(s, a.payload);
     case 'reset':
       return initialState;
     default:
@@ -48,49 +30,67 @@ const reducer = (s: PositionState, a: PositionAction): PositionState => {
   }
 };
 
+export type UnitProps = {
+  moveTo: { x: number, y: number };
+  skin: string;
+  // position: Position;
+};
+
 const Unit = (props: UnitProps) => {
-  const { moveTo } = props;
+  const {
+    moveTo,
+    skin,
+  } = props;
 
-  const [motion, update] = useReducer(reducer, initialState);
+  const [position, update] = useReducer(reducer, initialState);
 
-  const unitRef = useRef(initialState);
+  // Guess the next point to move, we will try to use this to find best direction
+  const predict = useCallback(() => {
+    const current = cloneDeep(position);
+    const distance = getDistance(current, moveTo);
+    if (distance === null) {
+      return initialState;
+    }
+    const direction = Math.atan2(distance.y, distance.x);
+
+    let dx = 3 * Math.cos(direction);
+    let dy = 3 * Math.sin(direction);
+
+    if (distance.value < 50) {
+      dx *= distance.value / 50;
+      dy *= distance.value / 50;
+    }
+
+    if (distance.value >= 1) {
+      return merge(current, {
+        x: current.x + dx,
+        y: current.y + dy,
+        direction,
+      });
+    }
+    return current;
+  }, [moveTo, position]);
 
   useTick((delta = 0) => {
-    const distance = getDistance(cloneDeep(unitRef.current), moveTo);
-    const arc = Math.atan2(distance.y, distance.x);
+    const next = predict();
 
-    let dx = 5 * Math.cos(arc);
-    let dy = 5 * Math.sin(arc);
+    const step = merge(position, {
+      x: lerp(position.x, next.x, delta),
+      y: lerp(position.y, next.y, delta),
+      direction: angularLerp(position.direction, next.direction, delta),
+    });
 
-    if (distance.value < 100) {
-      dx *= distance.value / 100;
-      dy *= distance.value / 100;
-    }
-
-    // unitRef.current.direction =
-    // angularLerp(unitRef.current.direction, arc, delta);
-
-    if (distance.value >= 3) {
-      unitRef.current.x += dx;
-      unitRef.current.y += dy;
-    }
-
-    const newState = {
-      ...initialState,
-      x: unitRef.current.x,
-      y: unitRef.current.y,
-    };
-
+    // interpolate between the origin and next states
     update({
       type: 'update',
-      payload: newState,
+      payload: step,
     });
   });
 
   return (
     <Sprite
-      image="https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png"
-      {...unitRef.current} // eslint-disable-line
+      image={skin}
+      {...position} // eslint-disable-line
     />
   );
 };

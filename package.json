@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@inlet/react-pixi": "^6.3.0",
+    "deepmerge": "^4.2.2",
     "lodash": "^4.17.21",
     "pixi.js": "^6.0.0",
     "proxy-compare": "^1.1.6",

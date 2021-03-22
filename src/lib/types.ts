@@ -5,7 +5,7 @@ export type Point = {
 
 export type PositionState = Point & {
   rotation: number;
-  anchor: number;
+  anchor: number | [number, number] | Point;
   direction: number;
 };
 

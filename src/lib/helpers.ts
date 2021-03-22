@@ -18,9 +18,9 @@ import type {
 export const getDistance = (
   source?: Point,
   target?: Point,
-): Distance => {
+): Distance | null => {
   if (!source || !target) {
-    return { x: 0, y: 0, value: 0 };
+    return null;
   }
 
   const x = target.x - source.x;
