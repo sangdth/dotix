@@ -8,13 +8,16 @@
   },
   "dependencies": {
     "@inlet/react-pixi": "^6.3.0",
+    "lodash": "^4.17.21",
     "pixi.js": "^6.0.0",
+    "proxy-compare": "^1.1.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-use": "^17.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
+    "@types/lodash": "^4.14.168",
     "@types/pixi.js": "^5.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

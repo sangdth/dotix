@@ -13,3 +13,5 @@ export {
   TilingSprite,
   Text,
 };
+
+export { default as Unit } from './Unit';
