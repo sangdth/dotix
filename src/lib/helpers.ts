@@ -10,15 +10,14 @@ import type {
 
 import { trackMemo } from 'proxy-compare';
 
-export type Distance = {
-  x: number;
-  y: number;
-  total: number;
-};
+import type {
+  Distance,
+  Point,
+} from './types';
 
 export const getDistance = (
-  source: Record<'x' | 'y', number>,
-  target: Record<'x' | 'y', number>,
+  source: Point | null,
+  target: Point | null,
 ): Distance | null => {
   if (!source || !target) return null;
 
