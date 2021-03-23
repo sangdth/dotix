@@ -15,6 +15,8 @@ import type {
   Point,
 } from './types';
 
+export const xy = (vertice: Point | Record<'x' | 'y', number>) => [vertice.x, vertice.y];
+
 export const getDistance = (
   source?: Point,
   target?: Point,

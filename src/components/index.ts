@@ -17,3 +17,5 @@ export {
 export { default as Unit } from './Unit';
 export { default as Hero } from './Hero';
 export { default as Tree } from './Tree';
+export { default as World } from './World';
+export { default as MouseWrapper } from './MouseWrapper';

@@ -3,10 +3,12 @@ import { useCallback, useState } from 'react';
 
 import {
   Container,
+  Hero,
+  MouseWrapper,
   Stage,
   TilingSprite,
-  Hero,
   Tree,
+  World,
 } from './components';
 import { initialState, stageOptions } from './lib/constants';
 
@@ -19,28 +21,32 @@ function App() {
 
   return (
     <Stage width={600} height={400} options={stageOptions}>
-      <Container
-        interactive
-        x={0}
-        y={0}
-        rightdown={handleMoveTo}
-      >
-        <TilingSprite
-          image="/sand.png"
-          width={600}
-          height={400}
-          tilePosition={{ x: 0, y: 0 }}
-        />
+      <World>
+        <MouseWrapper>
+          <Container
+            interactive
+            x={0}
+            y={0}
+            rightdown={handleMoveTo}
+          >
+            <TilingSprite
+              image="/sand.png"
+              width={600}
+              height={400}
+              tilePosition={{ x: 0, y: 0 }}
+            />
 
-        <Hero
-          moveTo={newPosition}
-          skin="/bunny.png"
-        />
+            <Hero
+              moveTo={newPosition}
+              skin="/bunny.png"
+            />
 
-        <Tree position={{ x: 400, y: 190 }} />
-        <Tree position={{ x: 420, y: 205 }} />
-        <Tree position={{ x: 410, y: 215 }} />
-      </Container>
+            <Tree position={{ x: 400, y: 190 }} />
+            <Tree position={{ x: 420, y: 205 }} />
+            <Tree position={{ x: 410, y: 215 }} />
+          </Container>
+        </MouseWrapper>
+      </World>
     </Stage>
   );
 }

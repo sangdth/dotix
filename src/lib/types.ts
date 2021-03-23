@@ -3,6 +3,16 @@ export type Point = {
   y: number;
 };
 
+export type MatterBodiesArgs = Point & {
+  height?: number;
+  maxSides?: number;
+  radius?: number;
+  sides?: number;
+  slope?: number;
+  width?: number;
+  options?: any; // FIXME
+};
+
 export type PositionState = Point & {
   rotation: number;
   anchor: number | [number, number] | Point;

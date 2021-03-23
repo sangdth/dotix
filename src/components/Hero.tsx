@@ -94,6 +94,12 @@ const Hero = (props: UnitProps) => {
       position={position}
       width={30}
       height={40}
+      options={{
+        friction: 0.8,
+        density: 0.001,
+        restitution: 0.5,
+        stiffness: 0.4,
+      }}
     />
   );
 };
