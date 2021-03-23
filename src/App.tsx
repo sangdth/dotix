@@ -5,7 +5,8 @@ import {
   Container,
   Stage,
   TilingSprite,
-  Unit,
+  Hero,
+  Tree,
 } from './components';
 import { initialState, stageOptions } from './lib/constants';
 
@@ -31,10 +32,12 @@ function App() {
           tilePosition={{ x: 0, y: 0 }}
         />
 
-        <Unit
+        <Hero
           moveTo={newPosition}
           skin="https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png"
         />
+
+        <Tree />
       </Container>
     </Stage>
   );
