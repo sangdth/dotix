@@ -645,6 +645,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.168.tgz#fe24632e79b7ade3f132891afff86caa5e5ce008"
   integrity sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
 
+"@types/matter-js@^0.14.11":
+  version "0.14.11"
+  resolved "https://registry.yarnpkg.com/@types/matter-js/-/matter-js-0.14.11.tgz#7fd07262e3cbd424b55004e36595b7d22cb74930"
+  integrity sha512-8oRVe57T/s1Fknnr1TTFZqRjOmp5syQptQCyYMvpfh/dWx3GvhcOUHoTOrg5seMguE//IOS+Wu32c0zAzewfXQ==
+
 "@types/node@^12.0.0":
   version "12.20.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.6.tgz#7b73cce37352936e628c5ba40326193443cfba25"
@@ -1912,6 +1917,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+matter-js@^0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.16.1.tgz#2466ef8ac54595e1869a7133091124caea568af6"
+  integrity sha512-P3nvyqTa7xxNOYbTtFVQFj9z9nf4Lyo9uHvncEXEUnyxYl4ntSjlnU73/ejFH6IUxpekDR9wqpnA1WvRdQ9B6A==
 
 mdn-data@2.0.14:
   version "2.0.14"

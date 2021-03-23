@@ -34,10 +34,12 @@ function App() {
 
         <Hero
           moveTo={newPosition}
-          skin="https://s3-us-west-2.amazonaws.com/s.cdpn.io/693612/IaUrttj.png"
+          skin="/bunny.png"
         />
 
-        <Tree />
+        <Tree position={{ x: 400, y: 190 }} />
+        <Tree position={{ x: 420, y: 205 }} />
+        <Tree position={{ x: 410, y: 215 }} />
       </Container>
     </Stage>
   );

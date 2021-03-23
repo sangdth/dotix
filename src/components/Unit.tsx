@@ -17,8 +17,8 @@ const Unit = (props: Props) => {
   const {
     position = {},
     skin = '/warning.png',
-    height = 50,
-    width = 50,
+    height = 10,
+    width = 10,
   } = props;
 
   const p: PositionState = merge(initialState, position);
@@ -28,7 +28,7 @@ const Unit = (props: Props) => {
       image={skin}
       height={height}
       width={width}
-      {...p /* eslint-disable-line */} 
+      {...p}
     />
   );
 };

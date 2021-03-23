@@ -9,7 +9,7 @@ export const stageOptions = {
 export const initialState: PositionState = {
   x: 10,
   y: 50,
-  anchor: { x: 0.5, y: 1 },
+  anchor: { x: 0.5, y: 0.8 },
   rotation: 0,
   direction: 0,
 };

@@ -41,6 +41,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
     'jsx-a11y/anchor-is-valid': [
