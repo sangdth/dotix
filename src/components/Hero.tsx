@@ -22,6 +22,11 @@ export type UnitProps = {
 const speed = 6;
 const width = 30;
 const height = 40;
+const heroOptions = {
+  density: 1,
+  // frictionAir: 0,
+  // inverseInertia: 0,
+};
 
 const reducer = (s: PositionState, a: PositionAction): PositionState => {
   switch (a.type) {
@@ -90,7 +95,7 @@ const Hero = (props: UnitProps) => {
       position={position}
       shape="circle"
       skin={skin}
-      options={{ density: 0.000001 }}
+      options={heroOptions}
     />
   );
 };
