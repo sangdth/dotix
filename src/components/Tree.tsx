@@ -19,7 +19,7 @@ const defaultOptions = {
 };
 
 const Tree = (props: Props) => {
-  const { position, options = {} } = props;
+  const { position = {}, options = {} } = props;
   const [n] = useState(random());
 
   return (

@@ -15,7 +15,7 @@ export type Props = BaseUnitProps & {
 
 const Unit = (props: Props) => {
   const {
-    position = { x: 0, y: 0 },
+    position = initialPosition,
     skin = '/warning.png',
     height = 10,
     width = 10,

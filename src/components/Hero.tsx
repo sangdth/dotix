@@ -54,8 +54,8 @@ const Hero = (props: UnitProps) => {
     }
     const direction = Math.atan2(distance.y, distance.x);
 
-    let dx = 5 * Math.cos(direction);
-    let dy = 5 * Math.sin(direction);
+    let dx = 3 * Math.cos(direction);
+    let dy = 3 * Math.sin(direction);
 
     if (distance.value < 50) {
       dx *= distance.value / 50;
@@ -96,11 +96,11 @@ const Hero = (props: UnitProps) => {
       shape="circle"
       skin={skin}
       options={{
-        // friction: 8,
-        // density: 1,
-        // restitution: 0.5,
-        // stiffness: 1,
-        // mass: 50,
+        friction: 8,
+        density: 1,
+        restitution: 0.5,
+        stiffness: 1,
+        mass: 50,
       }}
     />
   );

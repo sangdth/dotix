@@ -46,6 +46,10 @@ const MouseWrapper = (props: Props) => {
       World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
     });
 
+    Events.on(mouseConstraint, 'rightdown', () => {
+      World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
+    });
+
     return () => {
       // @ts-expect-error FIXME
       World.remove(engine.world, mouseConstraint);

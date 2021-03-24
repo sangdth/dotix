@@ -22,11 +22,10 @@ const Physic = (props: Props) => {
     shape = 'rectangle',
     options = {},
     lineStyle = [1, 0xff0000, 1],
-    fillStyle = [0xff0000, 0],
+    fillStyle = [0x00ff00, 0.2],
   } = props;
 
   const engine = useEngine();
-  // console.log('### position: ', position);
 
   const body = useRef<any>();
   const graphics = useRef<any>();
@@ -61,35 +60,34 @@ const Physic = (props: Props) => {
 
   useEffect(() => {
     const { x = 0, y = 0 } = position;
-    // console.log('### position: ', position);
 
     switch (shape) {
       case 'circle':
-        body.current = Bodies.circle(x, y, radius, options);
+        body.current = Bodies.circle(x, y, width / 2, options);
         break;
       case 'rectangle':
-        body.current = Bodies.rectangle(x, y, width, height, options);
+        body.current = Bodies.rectangle(x, y, width, height - 10, options);
         break;
       default:
         throw new Error('This type of shape does not supported yet');
     }
 
-    World.add(engine.world, body.current);
-
-    // Engine.run(engine);
-
     return () => {
       World.remove(engine.world, body.current);
     };
-  // }, [body, engine, width, height, options, radius, shape, position]);
+  }, [body, engine, width, height, options, radius, shape, position]);
+
+  useEffect(() => {
+    World.add(engine.world, body.current);
+    Engine.run(engine);
   }, []); // eslint-disable-line
 
   return (
     <>
-      {children}
       <Graphics ref={graphics} />
+      {children}
     </>
   );
 };
 
-export default Physic;
+export default memo(Physic);
