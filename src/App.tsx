@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import {
   Container,
@@ -12,7 +11,10 @@ import {
 } from './components';
 import { initialPosition, stageOptions } from './lib/constants';
 
-function App() {
+const width = 1080;
+const height = 720;
+
+export default function App() {
   const [newPosition, setNewPosition] = useState(initialPosition);
 
   const handleMoveTo = useCallback((e: any) => {
@@ -20,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <Stage width={600} height={400} options={stageOptions}>
+    <Stage width={width} height={height} options={stageOptions}>
       <EngineProvider>
         <MouseWrapper>
           <Container
@@ -31,8 +33,8 @@ function App() {
           >
             <TilingSprite
               image="/sand.png"
-              width={600}
-              height={400}
+              width={width}
+              height={height}
               tilePosition={{ x: 0, y: 0 }}
             />
 
@@ -50,5 +52,3 @@ function App() {
     </Stage>
   );
 }
-
-export default App;

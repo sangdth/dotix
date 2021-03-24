@@ -4,9 +4,9 @@ import { Sprite } from '@inlet/react-pixi';
 
 import { defaultOptions, initialPosition } from '../lib/constants';
 import { memo } from '../lib/helpers';
-import type { PositionState, BaseUnitProps } from '../lib/types';
-
 import Physic from './Physic';
+
+import type { BaseUnitProps } from '../lib/types';
 
 export type Props = BaseUnitProps & {
   options?: any;
@@ -15,15 +15,16 @@ export type Props = BaseUnitProps & {
 
 const Unit = (props: Props) => {
   const {
-    position = initialPosition,
+    position = {},
     skin = '/warning.png',
     height = 10,
     width = 10,
+    radius,
     shape = 'rectangle',
     options = {},
   } = props;
 
-  const finalPosition: PositionState = merge(initialPosition, position);
+  const finalPosition = merge(initialPosition, position);
   const finalOptions = merge(defaultOptions, options);
 
   return (
@@ -32,6 +33,7 @@ const Unit = (props: Props) => {
       options={finalOptions}
       height={height}
       width={width}
+      radius={radius}
       position={finalPosition}
     >
       <Sprite

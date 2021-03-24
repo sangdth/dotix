@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useApp } from '@inlet/react-pixi';
 import {
   Bodies,
-  Engine,
   Events,
   Mouse,
   MouseConstraint,
@@ -23,7 +22,7 @@ const MouseWrapper = (props: Props) => {
     constraint = {
       stiffness: 0.2,
       render: {
-        visible: false,
+        visible: true,
       },
     },
   } = props;
@@ -40,13 +39,7 @@ const MouseWrapper = (props: Props) => {
 
     World.add(engine.world, mouseConstraint);
 
-    Engine.run(engine);
-
     Events.on(mouseConstraint, 'mousedown', () => {
-      World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
-    });
-
-    Events.on(mouseConstraint, 'rightdown', () => {
       World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
     });
 

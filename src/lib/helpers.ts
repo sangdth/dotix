@@ -15,6 +15,8 @@ import type {
   Point,
 } from './types';
 
+export const random = (t: number) => Math.floor(((Math.random() * 10) % t) + 1);
+
 export const xy = (vertice: Point | Record<'x' | 'y', number>) => [vertice.x, vertice.y];
 
 export const getDistance = (

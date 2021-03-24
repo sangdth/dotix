@@ -1,8 +1,4 @@
-import * as React from 'react';
-import {
-  useCallback,
-  useReducer,
-} from 'react';
+import React, { useCallback, useReducer } from 'react';
 import { useTick } from '@inlet/react-pixi';
 import { cloneDeep } from 'lodash';
 import merge from 'deepmerge';
@@ -13,12 +9,19 @@ import {
   angularLerp,
   memo,
 } from '../lib/helpers';
-import type {
-  PositionState,
-  PositionAction,
-} from '../lib/types';
 import { initialPosition } from '../lib/constants';
 import Unit from './Unit';
+
+import type { PositionState, PositionAction } from '../lib/types';
+
+export type UnitProps = {
+  moveTo?: { x: number, y: number };
+  skin: string;
+};
+
+const speed = 6;
+const width = 30;
+const height = 40;
 
 const reducer = (s: PositionState, a: PositionAction): PositionState => {
   switch (a.type) {
@@ -31,17 +34,8 @@ const reducer = (s: PositionState, a: PositionAction): PositionState => {
   }
 };
 
-export type UnitProps = {
-  moveTo?: { x: number, y: number };
-  skin: string;
-  // position: Position;
-};
-
 const Hero = (props: UnitProps) => {
-  const {
-    moveTo,
-    skin,
-  } = props;
+  const { moveTo, skin } = props;
 
   const [position, update] = useReducer(reducer, initialPosition);
 
@@ -54,8 +48,8 @@ const Hero = (props: UnitProps) => {
     }
     const direction = Math.atan2(distance.y, distance.x);
 
-    let dx = 3 * Math.cos(direction);
-    let dy = 3 * Math.sin(direction);
+    let dx = speed * Math.cos(direction);
+    let dy = speed * Math.sin(direction);
 
     if (distance.value < 50) {
       dx *= distance.value / 50;
@@ -90,11 +84,13 @@ const Hero = (props: UnitProps) => {
 
   return (
     <Unit
-      width={30}
-      height={40}
+      width={width}
+      height={height}
+      radius={width / 2}
       position={position}
       shape="circle"
       skin={skin}
+      options={{ density: 0.000001 }}
     />
   );
 };

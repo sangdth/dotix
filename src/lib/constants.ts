@@ -1,6 +1,7 @@
 import type { PositionState } from './types';
 
 export const stageOptions = {
+  autoDensity: true,
   antialias: true,
   backgroundColor: 0x333333,
   // powerPreference: 'high-performance', // detect dual graphic cards before use
@@ -14,8 +15,8 @@ export const defaultOptions = {
 };
 
 export const initialPosition: PositionState = {
-  x: 10,
-  y: 50,
+  x: 50,
+  y: 150,
   anchor: { x: 0.5, y: 0.8 },
   rotation: 0,
   direction: 0,

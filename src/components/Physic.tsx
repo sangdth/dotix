@@ -4,9 +4,10 @@ import { Bodies, Engine, World } from 'matter-js';
 
 import { memo, xy } from '../lib/helpers';
 import { useEngine } from '../lib/hooks';
+
 import type { BaseUnitProps } from '../lib/types';
 
-type Props = BaseUnitProps & {
+export type Props = BaseUnitProps & {
   children: React.ReactNode;
   fillStyle?: number[];
   lineStyle?: number[];
@@ -21,14 +22,14 @@ const Physic = (props: Props) => {
     radius = 10,
     shape = 'rectangle',
     options = {},
-    lineStyle = [1, 0xff0000, 1],
-    fillStyle = [0x00ff00, 0.2],
+    lineStyle = [1, 0xff0000, 0.5],
+    fillStyle = [0x00ff00, 0.1],
   } = props;
-
-  const engine = useEngine();
 
   const body = useRef<any>();
   const graphics = useRef<any>();
+
+  const engine = useEngine();
 
   useTick(() => {
     const g = graphics.current;
@@ -51,8 +52,8 @@ const Physic = (props: Props) => {
       if (/Circle/.test(b.label)) {
         g.moveTo(b.position.x, b.position.y);
         g.lineTo(
-          b.position.x + Math.cos(b.angle) * (height / 2),
-          b.position.y + Math.sin(b.angle) * (height / 2),
+          b.position.x + Math.cos(b.angle) * radius,
+          b.position.y + Math.sin(b.angle) * radius,
         );
       }
     }
@@ -63,7 +64,7 @@ const Physic = (props: Props) => {
 
     switch (shape) {
       case 'circle':
-        body.current = Bodies.circle(x, y, width / 2, options);
+        body.current = Bodies.circle(x, y, radius, options);
         break;
       case 'rectangle':
         body.current = Bodies.rectangle(x, y, width, height - 10, options);
@@ -80,6 +81,7 @@ const Physic = (props: Props) => {
   useEffect(() => {
     World.add(engine.world, body.current);
     Engine.run(engine);
+    // Render.run(render);
   }, []); // eslint-disable-line
 
   return (

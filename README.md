@@ -1,6 +1,6 @@
 # Dotix - Defense of the Pixels
 
-A game on browser.
+I'm trying to clone Dota on browser.
 
 ## Installation
 
@@ -9,13 +9,13 @@ A game on browser.
 ```bash
 yarn
 yarn dev
-
 ```
+3. You should have dev server running at `localhost:3000`.
 
 ## Tech stacks:
 * Bundling by [Vite](https://github.com/vitejs/vite).
-* Views built on [Pixi.js](https://github.com/pixijs/pixi.js) with helps from [React-Pixi](https://github.com/inlet/react-pixi)
-* Physics with [matter-js](https://github.com/liabru/matter-js)
+* Views built on [Pixi.js](https://github.com/pixijs/pixi.js) with helps from [React-Pixi](https://github.com/inlet/react-pixi).
+* Physics with [matter-js](https://github.com/liabru/matter-js).
 * React, TypeScript, ESlint, etc.
 
 ## Help!
