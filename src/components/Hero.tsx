@@ -95,13 +95,6 @@ const Hero = (props: UnitProps) => {
       position={position}
       shape="circle"
       skin={skin}
-      options={{
-        friction: 8,
-        density: 1,
-        restitution: 0.5,
-        stiffness: 1,
-        mass: 50,
-      }}
     />
   );
 };

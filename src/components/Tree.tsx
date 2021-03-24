@@ -14,7 +14,7 @@ const total = 2;
 
 const random = () => Math.floor(((Math.random() * 10) % total) + 1);
 
-const defaultOptions = {
+const treeOptions = {
   isStatic: true,
 };
 
@@ -29,7 +29,7 @@ const Tree = (props: Props) => {
       position={position}
       shape="rectangle"
       skin={`/tree-${n}.png`}
-      options={merge(defaultOptions, options)}
+      options={merge(treeOptions, options)}
     />
   );
 };

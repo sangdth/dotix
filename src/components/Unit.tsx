@@ -2,7 +2,7 @@ import React from 'react';
 import merge from 'deepmerge';
 import { Sprite } from '@inlet/react-pixi';
 
-import { initialPosition } from '../lib/constants';
+import { defaultOptions, initialPosition } from '../lib/constants';
 import { memo } from '../lib/helpers';
 import type { PositionState, BaseUnitProps } from '../lib/types';
 
@@ -23,21 +23,22 @@ const Unit = (props: Props) => {
     options = {},
   } = props;
 
-  const p: PositionState = merge(initialPosition, position);
+  const finalPosition: PositionState = merge(initialPosition, position);
+  const finalOptions = merge(defaultOptions, options);
 
   return (
     <Physic
       shape={shape}
-      options={options}
+      options={finalOptions}
       height={height}
       width={width}
-      position={p}
+      position={finalPosition}
     >
       <Sprite
         image={skin}
         height={height}
         width={width}
-        {...p}
+        {...finalPosition}
       />
     </Physic>
   );

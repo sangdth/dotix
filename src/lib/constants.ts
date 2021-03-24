@@ -6,6 +6,13 @@ export const stageOptions = {
   // powerPreference: 'high-performance', // detect dual graphic cards before use
 };
 
+export const defaultOptions = {
+  friction: 8,
+  density: 1,
+  restitution: 0.9,
+  stiffness: 1,
+};
+
 export const initialPosition: PositionState = {
   x: 10,
   y: 50,
