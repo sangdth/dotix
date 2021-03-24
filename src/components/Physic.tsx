@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Graphics, useTick } from '@inlet/react-pixi';
-import { Bodies, Engine, World } from 'matter-js';
+import { Bodies, World } from 'matter-js';
 
 import { memo, xy } from '../lib/helpers';
 import { useEngine } from '../lib/hooks';
