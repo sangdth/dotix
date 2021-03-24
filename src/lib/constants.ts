@@ -6,7 +6,7 @@ export const stageOptions = {
   // powerPreference: 'high-performance', // detect dual graphic cards before use
 };
 
-export const initialState: PositionState = {
+export const initialPosition: PositionState = {
   x: 10,
   y: 50,
   anchor: { x: 0.5, y: 0.8 },

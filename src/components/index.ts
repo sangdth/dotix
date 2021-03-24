@@ -14,8 +14,12 @@ export {
   Text,
 };
 
+// General components, for display
 export { default as Unit } from './Unit';
 export { default as Hero } from './Hero';
 export { default as Tree } from './Tree';
-export { default as World } from './World';
+
+// Special wrapper
+export { default as Physic } from './Physic';
+export { default as EngineProvider } from './EngineProvider';
 export { default as MouseWrapper } from './MouseWrapper';

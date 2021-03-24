@@ -29,3 +29,12 @@ export type Distance = {
   y: number; // should be dy
   value: number;
 };
+
+export type BaseUnitProps = {
+  position?: Partial<PositionState>;
+  shape?: 'circle' | 'rectangle' | 'poligon' | 'trapezoid' | 'fromVertices';
+  radius?: number;
+  height?: number;
+  width?: number;
+  options?: any; // options for the matter-js mostly
+};

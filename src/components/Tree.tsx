@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import merge from 'deepmerge';
 
-import Unit from './Unit';
+import { memo } from '../lib/helpers';
 import type { PositionState } from '../lib/types';
+import Unit from './Unit';
 
 type Props = {
   position: Partial<PositionState>;
@@ -12,19 +14,24 @@ const total = 2;
 
 const random = () => Math.floor(((Math.random() * 10) % total) + 1);
 
+const defaultOptions = {
+  isStatic: true,
+};
+
 const Tree = (props: Props) => {
-  const { position, options } = props;
+  const { position, options = {} } = props;
   const [n] = useState(random());
 
   return (
     <Unit
-      skin={`/tree-${n}.png`}
       width={24}
       height={32}
       position={position}
-      options={{ isStatic: true }}
+      shape="rectangle"
+      skin={`/tree-${n}.png`}
+      options={merge(defaultOptions, options)}
     />
   );
 };
 
-export default Tree;
+export default memo(Tree);

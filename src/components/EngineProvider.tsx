@@ -4,11 +4,14 @@ import { Engine } from 'matter-js';
 import { useTick } from '@inlet/react-pixi';
 
 export const EngineContext = createContext<any>({});
+
 export const useEngine = () => useContext(EngineContext);
+
 export type Props = {
   children: React.ReactNode;
 };
-export const World = (props: Props) => {
+
+export const EngineProvider = (props: Props) => {
   const { children } = props;
   const [engine] = useState(Engine.create);
 
@@ -20,4 +23,5 @@ export const World = (props: Props) => {
     </EngineContext.Provider>
   );
 };
-export default World;
+
+export default EngineProvider;

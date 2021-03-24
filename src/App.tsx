@@ -3,17 +3,17 @@ import { useCallback, useState } from 'react';
 
 import {
   Container,
+  EngineProvider,
   Hero,
   MouseWrapper,
   Stage,
   TilingSprite,
   Tree,
-  World,
 } from './components';
-import { initialState, stageOptions } from './lib/constants';
+import { initialPosition, stageOptions } from './lib/constants';
 
 function App() {
-  const [newPosition, setNewPosition] = useState(initialState);
+  const [newPosition, setNewPosition] = useState(initialPosition);
 
   const handleMoveTo = useCallback((e: any) => {
     setNewPosition({ ...e.data.global }); // Need to create new object here
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Stage width={600} height={400} options={stageOptions}>
-      <World>
+      <EngineProvider>
         <MouseWrapper>
           <Container
             interactive
@@ -46,7 +46,7 @@ function App() {
             <Tree position={{ x: 410, y: 215 }} />
           </Container>
         </MouseWrapper>
-      </World>
+      </EngineProvider>
     </Stage>
   );
 }

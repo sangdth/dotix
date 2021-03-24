@@ -17,7 +17,7 @@ import type {
   PositionState,
   PositionAction,
 } from '../lib/types';
-import { initialState } from '../lib/constants';
+import { initialPosition } from '../lib/constants';
 import Unit from './Unit';
 
 const reducer = (s: PositionState, a: PositionAction): PositionState => {
@@ -25,9 +25,9 @@ const reducer = (s: PositionState, a: PositionAction): PositionState => {
     case 'update':
       return merge(s, a.payload);
     case 'reset':
-      return initialState;
+      return initialPosition;
     default:
-      return initialState;
+      return initialPosition;
   }
 };
 
@@ -43,14 +43,14 @@ const Hero = (props: UnitProps) => {
     skin,
   } = props;
 
-  const [position, update] = useReducer(reducer, initialState);
+  const [position, update] = useReducer(reducer, initialPosition);
 
   // Guess the next point to move, we will try to use this to find best direction
   const predict = useCallback(() => {
     const current = cloneDeep(position);
     const distance = getDistance(current, moveTo);
     if (distance === null) {
-      return initialState;
+      return initialPosition;
     }
     const direction = Math.atan2(distance.y, distance.x);
 
@@ -90,15 +90,17 @@ const Hero = (props: UnitProps) => {
 
   return (
     <Unit
-      skin={skin}
-      position={position}
       width={30}
       height={40}
+      position={position}
+      shape="circle"
+      skin={skin}
       options={{
-        friction: 0.8,
-        density: 0.001,
-        restitution: 0.5,
-        stiffness: 0.4,
+        // friction: 8,
+        // density: 1,
+        // restitution: 0.5,
+        // stiffness: 1,
+        // mass: 50,
       }}
     />
   );
