@@ -11,7 +11,7 @@ export type Props = {
   children: React.ReactNode;
 };
 
-export const EngineProvider = (props: Props) => {
+const EngineProvider = (props: Props) => {
   const { children } = props;
   const [engine] = useState(Engine.create);
 
