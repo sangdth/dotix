@@ -1,13 +1,13 @@
 import React, { useCallback, useReducer } from 'react';
 import { useTick } from '@inlet/react-pixi';
 import { cloneDeep } from 'lodash';
-import merge from 'deepmerge';
 
 import {
   getDistance,
   lerp,
   angularLerp,
   memo,
+  merge,
 } from '../lib/helpers';
 import { initialPosition } from '../lib/constants';
 import Unit from './Unit';

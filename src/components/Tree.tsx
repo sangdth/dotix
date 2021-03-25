@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import merge from 'deepmerge';
 
-import { memo, random } from '../lib/helpers';
+import { memo, merge, random } from '../lib/helpers';
 import Unit from './Unit';
 
 import type { PositionState } from '../lib/types';

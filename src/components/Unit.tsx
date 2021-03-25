@@ -1,9 +1,8 @@
 import React from 'react';
-import merge from 'deepmerge';
 import { Sprite } from '@inlet/react-pixi';
 
 import { defaultOptions, initialPosition } from '../lib/constants';
-import { memo } from '../lib/helpers';
+import { memo, merge } from '../lib/helpers';
 import Physic from './Physic';
 
 import type { BaseUnitProps } from '../lib/types';
