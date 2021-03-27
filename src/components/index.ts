@@ -20,6 +20,5 @@ export { default as Hero } from './Hero';
 export { default as Tree } from './Tree';
 
 // Special wrapper
-export { default as Physic } from './Physic';
 export { default as EngineProvider } from './EngineProvider';
 export { default as MouseWrapper } from './MouseWrapper';

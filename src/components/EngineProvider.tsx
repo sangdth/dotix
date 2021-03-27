@@ -11,6 +11,8 @@ export type Props = {
   children: React.ReactNode;
 };
 
+// TODO: Should we change the name to WorldProvider
+// and make the 4 big walls here?
 export const EngineProvider = (props: Props) => {
   const { children } = props;
   const [engine] = useState(Engine.create);

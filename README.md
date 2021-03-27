@@ -1,6 +1,6 @@
 # Dotix - Defense of the Pixels
 
-I'm trying to clone Dota on browser.
+I'm trying to clone Dota on browser. [Demo](https://dotix.vercel.app/)
 
 ## Installation
 
