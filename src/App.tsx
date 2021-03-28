@@ -17,7 +17,8 @@ export default function App() {
   const [newPosition, setNewPosition] = useState(initialPosition);
 
   const handleMoveTo = useCallback((e: any) => {
-    setNewPosition({ ...e.data.global }); // Need to create new object here
+    console.log('### e: ', e);
+    setNewPosition({ ...e.data.global });
   }, []);
 
   return (

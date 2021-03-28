@@ -8,6 +8,7 @@ import { Graphics, Sprite, useTick } from '@inlet/react-pixi';
 import {
   Body,
   Bodies,
+  Composites,
   World,
 } from 'matter-js';
 import { cloneDeep } from 'lodash';
@@ -75,6 +76,7 @@ const Unit = (props: Props) => {
   const { x = 0, y = 0 } = position;
 
   const finalOptions = merge(defaultOptions, options);
+  // console.log('### finalOptions: ', finalOptions);
 
   // FIXME: remove any type
   const body = useRef<any>();
@@ -161,7 +163,7 @@ const Unit = (props: Props) => {
         body.current = Bodies.rectangle(x, y, width, height - 5, finalOptions);
         break;
       default:
-        throw new Error('This type of shape does not supported yet');
+        throw new Error('This shape is not supported yet');
     }
 
     World.add(engine.world, body.current);
@@ -174,13 +176,13 @@ const Unit = (props: Props) => {
   return (
     <>
       <Graphics ref={graphics} />
-      <Sprite
-        image={skin}
-        height={height}
-        width={width}
-        anchor={anchor}
-        {...body.current?.position}
-      />
+      {/* <Sprite */}
+      {/*   image={skin} */}
+      {/*   height={height} */}
+      {/*   width={width} */}
+      {/*   anchor={anchor} */}
+      {/*   {...body.current?.position} */}
+      {/* /> */}
     </>
   );
 };

@@ -12,6 +12,12 @@ const width = 30;
 const height = 40;
 const heroOptions = {
   density: 1,
+  render: {
+    strokeStyle: '#ffffff',
+    sprite: {
+      texture: '/bunny.png',
+    },
+  },
 };
 
 const Hero = (props: UnitProps) => {
