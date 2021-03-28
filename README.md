@@ -19,4 +19,4 @@ yarn dev
 * React, TypeScript, ESlint, etc.
 
 ## Help!
-I'm so new in gaming area, if you found any bug, improvement, don't hesitate to drop me a message at sangdth@gmail.com or `@sangdth` Twitter. Thanks.
+I'm so new in gaming area, if you found any bug, improvement, don't hesitate to drop me a message at sangdth@gmail.com or `@sangdth` Twitter. Filing issue or making PR is always welcomed. Thanks.

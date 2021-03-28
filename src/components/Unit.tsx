@@ -24,6 +24,7 @@ import { defaultOptions, initialPosition } from '../lib/constants';
 import { useEngine } from '../lib/hooks';
 
 import type {
+  Anchor,
   BaseUnitProps,
   Point,
   PositionAction,
@@ -31,6 +32,7 @@ import type {
 } from '../lib/types';
 
 export type Props = BaseUnitProps & {
+  anchor?: Anchor;
   fillStyle?: number[];
   lineStyle?: number[];
   skin?: string;
@@ -49,8 +51,9 @@ const reducer = (s: PositionState, a: PositionAction): PositionState => {
   }
 };
 
-const Physic = (props: Props) => {
+const Unit = (props: Props) => {
   const {
+    anchor = 0.5,
     height = 10,
     width = 10,
     moveTo,
@@ -140,11 +143,9 @@ const Physic = (props: Props) => {
       );
     }
 
-    if (moveTo && body.current) {
-      Body.setPosition(body.current, next);
-    }
+    Body.setPosition(b, next);
 
-    // interpolate between the origin and next states
+    // interpolate between the origin and next position
     update({
       type: 'update',
       payload: step,
@@ -157,7 +158,7 @@ const Physic = (props: Props) => {
         body.current = Bodies.circle(x, y, radius, finalOptions);
         break;
       case 'rectangle':
-        body.current = Bodies.rectangle(x, y, width, height - 10, finalOptions);
+        body.current = Bodies.rectangle(x, y, width, height - 5, finalOptions);
         break;
       default:
         throw new Error('This type of shape does not supported yet');
@@ -177,11 +178,11 @@ const Physic = (props: Props) => {
         image={skin}
         height={height}
         width={width}
-        anchor={[0.5, 0.8]}
+        anchor={anchor}
         {...body.current?.position}
       />
     </>
   );
 };
 
-export default memo(Physic);
+export default memo(Unit);

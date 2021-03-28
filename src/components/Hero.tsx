@@ -21,12 +21,13 @@ const Hero = (props: UnitProps) => {
     <Unit
       width={width}
       height={height}
-      radius={width / 2}
-      speed={3}
-      shape="circle"
-      skin={skin}
       moveTo={moveTo}
+      anchor={[0.5, 0.8]}
       options={heroOptions}
+      shape="circle"
+      radius={width / 2}
+      skin={skin}
+      speed={3}
     />
   );
 };

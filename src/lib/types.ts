@@ -1,3 +1,8 @@
+export type Anchor = {
+  x: number;
+  y: number;
+} | number | [number, number];
+
 export type Point = {
   x: number;
   y: number;
@@ -15,7 +20,6 @@ export type MatterBodiesArgs = Point & {
 
 export type PositionState = Point & {
   rotation: number;
-  anchor: number | [number, number] | Point;
   direction: number;
 };
 

@@ -22,6 +22,7 @@ const Tree = (props: Props) => {
 
   return (
     <Unit
+      anchor={[0.5, 0.8]}
       width={24}
       height={32}
       position={position}
