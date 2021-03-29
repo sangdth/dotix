@@ -14,6 +14,7 @@ const heroOptions = {
   density: 1,
 };
 
+// TODO: Hero should have some special actions and skills
 const Hero = (props: UnitProps) => {
   const { moveTo, skin } = props;
 

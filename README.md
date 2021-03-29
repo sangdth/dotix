@@ -18,5 +18,10 @@ yarn dev
 * Physics with [matter-js](https://github.com/liabru/matter-js).
 * React, TypeScript, ESlint, etc.
 
+## To do:
+- [ ] Make the physic relationship between units.
+- [ ] Make the projectile and apply physic to it.
+- [ ] Make the attack actions and use the projectiles.
+
 ## Help!
 I'm so new in gaming area, if you found any bug, improvement, don't hesitate to drop me a message at sangdth@gmail.com or `@sangdth` Twitter. Filing issue or making PR is always welcomed. Thanks.
