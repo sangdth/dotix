@@ -8,7 +8,6 @@ import { Graphics, Sprite, useTick } from '@inlet/react-pixi';
 import {
   Body,
   Bodies,
-  Composites,
   World,
 } from 'matter-js';
 import { cloneDeep } from 'lodash';
@@ -76,9 +75,8 @@ const Unit = (props: Props) => {
   const { x = 0, y = 0 } = position;
 
   const finalOptions = merge(defaultOptions, options);
-  // console.log('### finalOptions: ', finalOptions);
 
-  // FIXME: remove any type
+  // FIXME: make types here
   const body = useRef<any>();
   const graphics = useRef<any>();
 
@@ -176,13 +174,13 @@ const Unit = (props: Props) => {
   return (
     <>
       <Graphics ref={graphics} />
-      {/* <Sprite */}
-      {/*   image={skin} */}
-      {/*   height={height} */}
-      {/*   width={width} */}
-      {/*   anchor={anchor} */}
-      {/*   {...body.current?.position} */}
-      {/* /> */}
+      <Sprite
+        image={skin}
+        height={height}
+        width={width}
+        anchor={anchor}
+        {...body.current?.position}
+      />
     </>
   );
 };

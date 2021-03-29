@@ -33,7 +33,7 @@ const Hero = (props: UnitProps) => {
       shape="circle"
       radius={width / 2}
       skin={skin}
-      speed={3}
+      speed={10}
     />
   );
 };

@@ -1,10 +1,9 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useState,
 } from 'react';
-import { Engine, Render, Runner } from 'matter-js';
+import { Engine } from 'matter-js';
 
 import { useTick } from '@inlet/react-pixi';
 
@@ -23,24 +22,6 @@ export const EngineProvider = (props: Props) => {
   const [engine] = useState(Engine.create);
 
   useTick((d = 0) => Engine.update(engine, d * (1000 / 60), 1));
-
-  useEffect(() => {
-    const render = Render.create({
-      element: document.body,
-      engine,
-      options: {
-        /* width: 800, */
-        /* height: 600, */
-        // showAngleIndicator: false,
-        wireframes: false,
-      },
-    });
-
-    Render.run(render);
-
-    const runner = Runner.create();
-    Runner.run(runner, engine);
-  }, []); // eslint-disable-line
 
   return (
     <EngineContext.Provider value={engine}>

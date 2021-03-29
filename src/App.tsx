@@ -22,7 +22,11 @@ export default function App() {
   }, []);
 
   return (
-    <Stage width={width} height={height} options={stageOptions}>
+    <Stage
+      width={width}
+      height={height}
+      options={stageOptions}
+    >
       <EngineProvider>
         <Container
           interactive
