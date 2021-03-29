@@ -16,8 +16,8 @@ const height = 720;
 export default function App() {
   const [newPosition, setNewPosition] = useState(initialPosition);
 
+  // TODO: Need to move this down to the Hero or Unit level
   const handleMoveTo = useCallback((e: any) => {
-    console.log('### e: ', e);
     setNewPosition({ ...e.data.global });
   }, []);
 

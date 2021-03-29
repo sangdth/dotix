@@ -40,7 +40,7 @@ export const EngineProvider = (props: Props) => {
 
     const runner = Runner.create();
     Runner.run(runner, engine);
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <EngineContext.Provider value={engine}>
