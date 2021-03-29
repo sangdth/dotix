@@ -12,12 +12,6 @@ const width = 30;
 const height = 40;
 const heroOptions = {
   density: 1,
-  render: {
-    strokeStyle: '#ffffff',
-    sprite: {
-      texture: '/bunny.png',
-    },
-  },
 };
 
 const Hero = (props: UnitProps) => {
@@ -28,10 +22,10 @@ const Hero = (props: UnitProps) => {
       width={width}
       height={height}
       moveTo={moveTo}
-      anchor={[0.5, 0.8]}
+      anchor={[0.5, 0.6]}
       options={heroOptions}
       shape="circle"
-      radius={width / 2}
+      radius={width / 1.5}
       skin={skin}
       speed={10}
     />

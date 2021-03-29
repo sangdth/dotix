@@ -82,7 +82,7 @@ const Unit = (props: Props) => {
 
   // Guess the next point to move, we will try to use this to find best direction
   const predict = useCallback(() => {
-    const current = cloneDeep(position);
+    const current = cloneDeep(body.current.position || initialPosition);
     const distance = getDistance(current, moveTo);
 
     if (distance === null) {
@@ -108,19 +108,18 @@ const Unit = (props: Props) => {
     }
 
     return current;
-  }, [speed, moveTo, position]);
+  }, [speed, moveTo]);
 
   useTick((delta = 0) => {
     const next = predict();
-
-    const step = merge(position, {
-      x: lerp(position.x, next.x, delta),
-      y: lerp(position.y, next.y, delta),
-      direction: angularLerp(position.direction, next.direction, delta),
-    });
-
     const g = graphics.current;
     const b = body.current;
+
+    const step = merge(b.position, {
+      x: lerp(b.position.x, next.x, delta),
+      y: lerp(b.position.y, next.y, delta),
+      direction: angularLerp(b.position.direction, next.direction, delta),
+    });
 
     g.clear();
 
@@ -169,7 +168,7 @@ const Unit = (props: Props) => {
     return () => {
       World.remove(engine.world, body.current);
     };
-  }, []); // eslint-disable-line
+  }, [body]); // eslint-disable-line
 
   return (
     <>
@@ -179,7 +178,7 @@ const Unit = (props: Props) => {
         height={height}
         width={width}
         anchor={anchor}
-        {...body.current?.position}
+        {...position}
       />
     </>
   );
