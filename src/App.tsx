@@ -56,7 +56,7 @@ export default function App() {
             skin="/bunny.png"
           />
 
-          <Tree position={{ x: 600, y: 100 }} />
+          <Tree id="tree-1" position={{ x: 600, y: 100 }} />
         </Container>
       </EngineProvider>
     </Stage>

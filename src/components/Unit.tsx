@@ -59,6 +59,7 @@ const Unit = (props: Props) => {
     width = 10,
     moveTo,
     radius = 10,
+    rotation = 0,
     speed = 6,
     shape = 'rectangle',
     skin = '/warning.png',
@@ -113,16 +114,8 @@ const Unit = (props: Props) => {
   }, [localPosition, speed, moveTo]);
 
   useTick((delta = 0) => {
-    const next = predict();
     const g = graphics.current;
     const b = body.current;
-
-    const step = merge(b.position, {
-      x: lerp(b.position.x, next.x, delta),
-      y: lerp(b.position.y, next.y, delta),
-      direction: angularLerp(b.position.direction, next.direction, delta),
-      rotation: 0,
-    });
 
     if (debug) {
       g.clear();
@@ -141,19 +134,33 @@ const Unit = (props: Props) => {
       if (/Circle/.test(b.label)) {
         g.moveTo(b.position.x, b.position.y);
         g.lineTo(
-          b.position.x + Math.cos(b.angle) * radius,
+          b.position.x + Math.cos(b.angle) * radius + 20,
           b.position.y + Math.sin(b.angle) * radius,
         );
       }
     }
 
-    Body.setPosition(b, next);
+    if (!options.isStatic) {
+      const next = predict();
 
-    // interpolate between the origin and next position
-    update({
-      type: 'update',
-      payload: step,
-    });
+      const microPosition = {
+        x: lerp(b.position.x, next.x, delta),
+        y: lerp(b.position.y, next.y, delta),
+        direction: angularLerp(b.angle, next.direction, delta),
+      };
+      // console.log('### microPosition: ', microPosition);
+
+      const step = merge(b.position, microPosition);
+
+      Body.setPosition(b, next);
+      // Body.rotate(b, Math.PI / 8);
+
+      // interpolate between the origin and next position
+      update({
+        type: 'update',
+        payload: step,
+      });
+    }
   });
 
   useEffect(() => {
@@ -167,6 +174,8 @@ const Unit = (props: Props) => {
       default:
         throw new Error('This shape is not supported yet');
     }
+
+    // Body.rotate(body.current, Math.PI / 4);
 
     World.add(engine.world, body.current);
 
@@ -185,7 +194,7 @@ const Unit = (props: Props) => {
         height={height}
         width={width}
         anchor={anchor}
-        mouseover={(e) => console.log(id, e)}
+        // mouseover={(e) => console.log(id, e)}
         {...localPosition}
       />
     </>

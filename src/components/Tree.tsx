@@ -6,6 +6,7 @@ import Unit from './Unit';
 import type { PositionState } from '../lib/types';
 
 type Props = {
+  id: string;
   position: Partial<PositionState>;
   options?: any;
 };
@@ -17,11 +18,12 @@ const treeOptions = {
 };
 
 const Tree = (props: Props) => {
-  const { position = {}, options = {} } = props;
+  const { id, position = {}, options = {} } = props;
   const [n] = useState(random(total));
 
   return (
     <Unit
+      id={`${id}-${n}`}
       anchor={[0.5, 0.8]}
       width={24}
       height={32}
