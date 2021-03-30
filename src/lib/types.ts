@@ -19,7 +19,7 @@ export type MatterBodiesArgs = Point & {
 };
 
 export type PositionState = Point & {
-  rotation: number;
+  direction: number;
 };
 
 export type PositionAction = {

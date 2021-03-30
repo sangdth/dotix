@@ -17,5 +17,5 @@ export const defaultOptions = {
 export const initialPosition: PositionState = {
   x: 50,
   y: 150,
-  rotation: 0,
+  direction: 0,
 };

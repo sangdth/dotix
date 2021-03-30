@@ -22,6 +22,7 @@ yarn dev
 - [ ] Make the physic relationship between units.
 - [ ] Make the projectile and apply physic to it.
 - [ ] Make the attack actions and use the projectiles.
+- [ ] Fix the direction/angle problem. (Sync sprite direction with body angle)
 
 ## Help!
 I'm so new in gaming area, if you found any bug, improvement, don't hesitate to drop me a message at sangdth@gmail.com or `@sangdth` Twitter. Filing issue or making PR is always welcomed. Thanks.

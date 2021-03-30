@@ -134,7 +134,7 @@ const Unit = (props: Props) => {
       if (/Circle/.test(b.label)) {
         g.moveTo(b.position.x, b.position.y);
         g.lineTo(
-          b.position.x + Math.cos(b.angle) * radius + 20,
+          b.position.x + Math.cos(b.angle) * radius,
           b.position.y + Math.sin(b.angle) * radius,
         );
       }
@@ -148,12 +148,15 @@ const Unit = (props: Props) => {
         y: lerp(b.position.y, next.y, delta),
         direction: angularLerp(b.angle, next.direction, delta),
       };
-      // console.log('### microPosition: ', microPosition);
 
       const step = merge(b.position, microPosition);
 
-      Body.setPosition(b, next);
-      // Body.rotate(b, Math.PI / 8);
+      Body.setPosition(b, step);
+
+      if (step.direction) {
+        // FIXME: Why the fuck it does not stay in that direction???
+        Body.rotate(b, step.direction);
+      }
 
       // interpolate between the origin and next position
       update({
@@ -162,6 +165,12 @@ const Unit = (props: Props) => {
       });
     }
   });
+
+  // useEffect(() => {
+  //   if (localPosition.direction) {
+  // Body.rotate(body.current, 0.9148827686703739);
+  //   }
+  // }, [localPosition]);
 
   useEffect(() => {
     switch (shape) {
@@ -175,14 +184,12 @@ const Unit = (props: Props) => {
         throw new Error('This shape is not supported yet');
     }
 
-    // Body.rotate(body.current, Math.PI / 4);
-
     World.add(engine.world, body.current);
 
     return () => {
       World.remove(engine.world, body.current);
     };
-  }, [body]); // eslint-disable-line
+  }, []); // eslint-disable-line
 
   return (
     <>
