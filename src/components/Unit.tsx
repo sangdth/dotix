@@ -38,6 +38,7 @@ export type Props = BaseUnitProps & {
   skin?: string;
   speed?: number;
   moveTo?: Point;
+  debug?: boolean;
 };
 
 const reducer = (s: PositionState, a: PositionAction): PositionState => {
@@ -54,6 +55,7 @@ const reducer = (s: PositionState, a: PositionAction): PositionState => {
 const Unit = (props: Props) => {
   const {
     anchor = 0.5,
+    debug = import.meta.env.DEV,
     height = 10,
     width = 10,
     moveTo,
@@ -121,25 +123,27 @@ const Unit = (props: Props) => {
       direction: angularLerp(b.position.direction, next.direction, delta),
     });
 
-    g.clear();
+    if (debug) {
+      g.clear();
 
-    g.lineStyle(...lineStyle);
-    g.beginFill(...fillStyle);
+      g.lineStyle(...lineStyle);
+      g.beginFill(...fillStyle);
 
-    g.moveTo(...xy(b.vertices[0]));
+      g.moveTo(...xy(b.vertices[0]));
 
-    for (let j = 1; j < b.vertices.length; j += 1) {
-      g.lineTo(...xy(b.vertices[j]));
-    }
+      for (let j = 1; j < b.vertices.length; j += 1) {
+        g.lineTo(...xy(b.vertices[j]));
+      }
 
-    g.lineTo(...xy(b.vertices[0]));
+      g.lineTo(...xy(b.vertices[0]));
 
-    if (/Circle/.test(b.label)) {
-      g.moveTo(b.position.x, b.position.y);
-      g.lineTo(
-        b.position.x + Math.cos(b.angle) * radius,
-        b.position.y + Math.sin(b.angle) * radius,
-      );
+      if (/Circle/.test(b.label)) {
+        g.moveTo(b.position.x, b.position.y);
+        g.lineTo(
+          b.position.x + Math.cos(b.angle) * radius,
+          b.position.y + Math.sin(b.angle) * radius,
+        );
+      }
     }
 
     Body.setPosition(b, next);
@@ -172,7 +176,8 @@ const Unit = (props: Props) => {
 
   return (
     <>
-      <Graphics ref={graphics} />
+      {debug && <Graphics ref={graphics} />}
+
       <Sprite
         image={skin}
         height={height}
