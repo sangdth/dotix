@@ -35,7 +35,9 @@ export type Distance = {
 };
 
 export type BaseUnitProps = {
-  position?: Partial<PositionState>;
+  id: string;
+  position: Partial<PositionState>;
+  anchor?: Anchor;
   shape?: 'circle' | 'rectangle' | 'poligon' | 'trapezoid' | 'fromVertices';
   radius?: number;
   height?: number;

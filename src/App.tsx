@@ -8,13 +8,15 @@ import {
   TilingSprite,
   Tree,
 } from './components';
-import { initialPosition, stageOptions } from './lib/constants';
+import { stageOptions } from './lib/constants';
 
 const width = 1080;
 const height = 720;
 
 export default function App() {
-  const [newPosition, setNewPosition] = useState(initialPosition);
+  const initHero1 = { x: 100, y: 300 };
+  const initHero2 = { x: 450, y: 250 };
+  const [newPosition, setNewPosition] = useState(initHero1);
 
   // TODO: Need to move this down to the Hero or Unit level
   const handleMoveTo = useCallback((e: any) => {
@@ -42,11 +44,19 @@ export default function App() {
           />
 
           <Hero
+            id="hero1"
+            position={initHero1}
             moveTo={newPosition}
             skin="/bunny.png"
           />
 
-          <Tree position={{ x: 400, y: 190 }} />
+          <Hero
+            id="hero2"
+            position={initHero2}
+            skin="/bunny.png"
+          />
+
+          <Tree position={{ x: 600, y: 100 }} />
         </Container>
       </EngineProvider>
     </Stage>

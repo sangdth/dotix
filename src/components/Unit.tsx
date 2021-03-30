@@ -24,7 +24,6 @@ import { defaultOptions, initialPosition } from '../lib/constants';
 import { useEngine } from '../lib/hooks';
 
 import type {
-  Anchor,
   BaseUnitProps,
   Point,
   PositionAction,
@@ -32,7 +31,6 @@ import type {
 } from '../lib/types';
 
 export type Props = BaseUnitProps & {
-  anchor?: Anchor;
   fillStyle?: number[];
   lineStyle?: number[];
   skin?: string;
@@ -57,6 +55,7 @@ const Unit = (props: Props) => {
     anchor = 0.5,
     debug = import.meta.env.DEV,
     height = 10,
+    id,
     width = 10,
     moveTo,
     radius = 10,
@@ -64,6 +63,7 @@ const Unit = (props: Props) => {
     shape = 'rectangle',
     skin = '/warning.png',
     options = {},
+    position,
     lineStyle = [1, 0xff0000, 0.5],
     fillStyle = [0x00ff00, 0.1],
   } = props;
@@ -73,8 +73,8 @@ const Unit = (props: Props) => {
   // TODO: Still do not know is it OK?
   engine.world.gravity.y = 0;
 
-  const [position, update] = useReducer(reducer, initialPosition);
-  const { x = 0, y = 0 } = position;
+  const [localPosition, update] = useReducer(reducer, merge(initialPosition, position));
+  const { x = 0, y = 0 } = localPosition;
 
   const finalOptions = merge(defaultOptions, options);
 
@@ -84,11 +84,11 @@ const Unit = (props: Props) => {
 
   // Guess the next point to move, we will try to use this to find best direction
   const predict = useCallback(() => {
-    const current = cloneDeep(body.current.position || initialPosition);
+    const current = cloneDeep(body.current.position);
     const distance = getDistance(current, moveTo);
 
     if (distance === null) {
-      return initialPosition;
+      return localPosition;
     }
 
     const direction = Math.atan2(distance.y, distance.x);
@@ -110,7 +110,7 @@ const Unit = (props: Props) => {
     }
 
     return current;
-  }, [speed, moveTo]);
+  }, [localPosition, speed, moveTo]);
 
   useTick((delta = 0) => {
     const next = predict();
@@ -121,6 +121,7 @@ const Unit = (props: Props) => {
       x: lerp(b.position.x, next.x, delta),
       y: lerp(b.position.y, next.y, delta),
       direction: angularLerp(b.position.direction, next.direction, delta),
+      rotation: 0,
     });
 
     if (debug) {
@@ -179,11 +180,13 @@ const Unit = (props: Props) => {
       {debug && <Graphics ref={graphics} />}
 
       <Sprite
+        interactive
         image={skin}
         height={height}
         width={width}
         anchor={anchor}
-        {...position}
+        mouseover={(e) => console.log(id, e)}
+        {...localPosition}
       />
     </>
   );

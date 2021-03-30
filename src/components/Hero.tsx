@@ -1,9 +1,13 @@
 import React from 'react';
 
 import { memo } from '../lib/helpers';
+import type { BaseUnitProps, PositionState } from '../lib/types';
+
 import Unit from './Unit';
 
-export type UnitProps = {
+export type HeroProps = BaseUnitProps & {
+  id: string;
+  position?: Partial<PositionState>;
   moveTo?: { x: number, y: number };
   skin: string;
 };
@@ -15,11 +19,15 @@ const heroOptions = {
 };
 
 // TODO: Hero should have some special actions and skills
-const Hero = (props: UnitProps) => {
-  const { moveTo, skin } = props;
+const Hero = (props: HeroProps) => {
+  const {
+    id, moveTo, position, skin,
+  } = props;
 
   return (
     <Unit
+      id={id}
+      position={position}
       width={width}
       height={height}
       moveTo={moveTo}
